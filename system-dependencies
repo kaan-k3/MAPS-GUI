@@ -1,0 +1,5 @@
+Compiler: MSVC 2022 x64
+Qt: 6.10.1 (msvc2022_64)
+Package manager: vcpkg
+Toolchain file: C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+Dependency: opencascade:x64-windows
