@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=MAPS0 Desktop Client
+Comment=MAPS0 marine hydrodynamic solver desktop client
+Exec=GUI_MAPS
+Icon=maps0
+Categories=Science;Engineering;
+Terminal=false

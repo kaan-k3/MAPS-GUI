@@ -1,0 +1,10 @@
+^C:\USERS\KAANK\DOWNLOADS\REPROJECTUPDATE\BUILD\CMAKEFILES\99B81EF0276CAB203BFC80445CD8C12C\GENERATE.STAMP.RULE
+setlocal
+C:\Qt\Tools\CMake_64\bin\cmake.exe -SC:/Users/kaank/Downloads/reprojectupdate -BC:/Users/kaank/Downloads/reprojectupdate/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/kaank/Downloads/reprojectupdate/build/GUI_MAPS.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

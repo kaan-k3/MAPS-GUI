@@ -1,0 +1,11 @@
+CMakeLists.txt
+igesreader.cpp
+igesreader.h
+main.cpp
+mainwindow.cpp
+mainwindow.h
+mainwindow.ui
+nurbs.h
+nurbs_evaluation.h
+viewerwidget.cpp
+viewerwidget.h

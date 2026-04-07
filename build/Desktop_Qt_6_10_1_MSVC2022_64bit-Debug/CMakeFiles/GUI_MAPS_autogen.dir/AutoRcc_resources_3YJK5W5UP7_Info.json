@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/GUI_MAPS_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/kaank/Downloads/reprojectupdate",
+	"CMAKE_SOURCE_DIR" : "C:/Users/kaank/Downloads/reprojectupdate",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/GUI_MAPS_autogen/include",
+	"INPUTS" : [ "C:/Users/kaank/Downloads/reprojectupdate/resources/arrow.png" ],
+	"LOCK_FILE" : "C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/CMakeFiles/GUI_MAPS_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.10.1/msvc2022_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/CMakeFiles/GUI_MAPS_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "C:/Users/kaank/Downloads/reprojectupdate/resources/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

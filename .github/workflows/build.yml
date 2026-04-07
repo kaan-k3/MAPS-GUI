@@ -1,0 +1,98 @@
+name: Build MAPS0 Desktop Client
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:   # lets you trigger a build manually from the GitHub UI
+
+jobs:
+  build:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact_name: MAPS0DesktopClient-Windows
+          - os: macos-latest
+            artifact_name: MAPS0DesktopClient-macOS
+          - os: ubuntu-22.04
+            artifact_name: MAPS0DesktopClient-Linux
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install Qt 6.10.1
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.10.1'
+          modules: 'qtcharts'
+          cache: true
+
+      - name: Install Linux system deps
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0 \
+              libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 \
+              libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 \
+              libxcb-xkb1 libxcb-cursor0 libfuse2
+
+      - name: Configure CMake
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+
+      - name: Install (stages binary + Qt runtime)
+        run: cmake --install build --prefix dist --config Release
+
+      # ── Linux: wrap the install dir in an AppImage ────────────────────
+      - name: Build AppImage (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          wget -q https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          wget -q https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+          chmod +x linuxdeploy-*.AppImage
+
+          mkdir -p AppDir/usr/bin AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/256x256/apps
+          cp dist/bin/GUI_MAPS AppDir/usr/bin/
+          cp packaging/maps0.desktop AppDir/usr/share/applications/
+
+          # Placeholder icon (256x256 PNG) — replace with your real icon later
+          convert -size 256x256 xc:'#3a7bd5' AppDir/usr/share/icons/hicolor/256x256/apps/maps0.png || \
+            (sudo apt-get install -y imagemagick && convert -size 256x256 xc:'#3a7bd5' AppDir/usr/share/icons/hicolor/256x256/apps/maps0.png)
+
+          export QML_SOURCES_PATHS=$PWD
+          ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
+          mkdir -p artifacts
+          mv MAPS0_Desktop_Client*.AppImage artifacts/ 2>/dev/null || mv *.AppImage artifacts/
+
+      # ── macOS: package the .app into a DMG ────────────────────────────
+      - name: Build DMG (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          mkdir -p artifacts
+          hdiutil create -volname "MAPS0 Desktop Client" \
+              -srcfolder "dist/MAPS0 Desktop Client.app" \
+              -ov -format UDZO \
+              "artifacts/MAPS0DesktopClient.dmg"
+
+      # ── Windows: just zip the install dir ─────────────────────────────
+      - name: Package ZIP (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path artifacts | Out-Null
+          Compress-Archive -Path dist\bin\* -DestinationPath artifacts\MAPS0DesktopClient-Windows.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: artifacts/*
+          if-no-files-found: error

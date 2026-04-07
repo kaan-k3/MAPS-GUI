@@ -1,0 +1,24 @@
+# ninja log v6
+19	94	7972216182532600	CMakeFiles/clean.additional	baedbe210acaa455
+95	2036	7972231700331133	GUI_MAPS_autogen/mocs_compilation.cpp	a51d9568e73fe71
+156	188	7972211816061113	clean	577b940aee94fbd7
+95	2036	7972231700331133	GUI_MAPS_autogen/timestamp	a51d9568e73fe71
+95	2036	7972231700331133	C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/GUI_MAPS_autogen/timestamp	a51d9568e73fe71
+95	2036	7972231700331133	C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/GUI_MAPS_autogen/mocs_compilation.cpp	a51d9568e73fe71
+2057	14773	7972216207026151	CMakeFiles/GUI_MAPS.dir/main.cpp.obj	ff5216df640ea9ff
+2400	12618	7972231706217911	CMakeFiles/GUI_MAPS.dir/surfacecontroldialog.cpp.obj	163c89dc4b208f57
+806	2294	7966004064621703	CMakeFiles/GUI_MAPS.dir/igesreader.cpp.obj	8cde3bcf6dc4e989
+2341	16579	7972231705635052	CMakeFiles/GUI_MAPS.dir/GUI_MAPS_autogen/mocs_compilation.cpp.obj	d5f5c691a8c78157
+2381	11389	7972231706036343	CMakeFiles/GUI_MAPS.dir/viewerwidget.cpp.obj	e35434c3bf9a0679
+2148	14413	7972216207943305	CMakeFiles/GUI_MAPS.dir/projectassembler.cpp.obj	eeb741d3343d553
+2358	19020	7972231705798129	CMakeFiles/GUI_MAPS.dir/mainwindow.cpp.obj	f512759fc5fbf340
+19020	20117	7972231872396739	GUI_MAPS.exe	770f6a63df13f5ab
+2129	10867	7972216207741176	CMakeFiles/GUI_MAPS.dir/surfaceworker.cpp.obj	ffdecc48cff12c32
+53	843	7972246052545790	build.ninja	816c3c1f6a329481
+2413	9765	7972231706354699	CMakeFiles/GUI_MAPS.dir/principaldatadialog.cpp.obj	fed7118a8f28b1d6
+2427	10452	7972231706495314	CMakeFiles/GUI_MAPS.dir/wavesettingsdialog.cpp.obj	3b32991ee1393fda
+2453	14381	7972231706750924	CMakeFiles/GUI_MAPS.dir/resultsviewer.cpp.obj	b2f8062cb19145b9
+2439	12919	7972231706611803	CMakeFiles/GUI_MAPS.dir/runconfigdialog.cpp.obj	e5bbe3ed838f3985
+2042	2341	7972231704861125	GUI_MAPS_autogen/3YJK5W5UP7/qrc_resources.cpp	a0e323b4dc6fca65
+2042	2341	7972231704861125	C:/Users/kaank/Downloads/reprojectupdate/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/GUI_MAPS_autogen/3YJK5W5UP7/qrc_resources.cpp	a0e323b4dc6fca65
+2472	3921	7972231706937626	CMakeFiles/GUI_MAPS.dir/GUI_MAPS_autogen/3YJK5W5UP7/qrc_resources.cpp.obj	3d78b1eb444f65de
