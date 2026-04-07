@@ -40,7 +40,9 @@ jobs:
           sudo apt-get install -y libgl1-mesa-dev libxkbcommon-x11-0 \
               libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 \
               libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 \
-              libxcb-xkb1 libxcb-cursor0 libfuse2
+              libxcb-xkb1 libxcb-cursor0 libfuse2 \
+              libopengl0 libegl1 libglx0 libglvnd0 \
+              libxcb-cursor-dev libxkbcommon-dev
 
       - name: Configure CMake
         run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
@@ -68,7 +70,14 @@ jobs:
             (sudo apt-get install -y imagemagick && convert -size 256x256 xc:'#3a7bd5' AppDir/usr/share/icons/hicolor/256x256/apps/maps0.png)
 
           export QML_SOURCES_PATHS=$PWD
-          ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage
+          # Force bundling of GL/EGL/xcb libs that linuxdeploy-plugin-qt skips by default
+          export EXTRA_QT_MODULES="opengl;openglwidgets;charts"
+          ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt \
+              --library /usr/lib/x86_64-linux-gnu/libOpenGL.so.0 \
+              --library /usr/lib/x86_64-linux-gnu/libEGL.so.1 \
+              --library /usr/lib/x86_64-linux-gnu/libGLX.so.0 \
+              --library /usr/lib/x86_64-linux-gnu/libxcb-cursor.so.0 \
+              --output appimage
           mkdir -p artifacts
           mv MAPS0_Desktop_Client*.AppImage artifacts/ 2>/dev/null || mv *.AppImage artifacts/
 
