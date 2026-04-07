@@ -1,5 +1,0 @@
-C:/Users/kaank/Downloads/reprojectupdate/build/CMakeFiles/GUI_MAPS.dir
-C:/Users/kaank/Downloads/reprojectupdate/build/CMakeFiles/PACKAGE.dir
-C:/Users/kaank/Downloads/reprojectupdate/build/CMakeFiles/INSTALL.dir
-C:/Users/kaank/Downloads/reprojectupdate/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/kaank/Downloads/reprojectupdate/build/CMakeFiles/ZERO_CHECK.dir

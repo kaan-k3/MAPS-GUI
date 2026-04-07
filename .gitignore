@@ -1,0 +1,30 @@
+# Build artifacts
+build/
+build-*/
+dist/
+out/
+cmake-build-*/
+
+# Qt Creator
+*.user
+*.user.*
+*.autosave
+
+# IDE / OS
+.vs/
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Generated
+CMakeCache.txt
+CMakeFiles/
+CMakeUserPresets.json
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
