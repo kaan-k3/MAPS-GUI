@@ -17,8 +17,10 @@ jobs:
         include:
           - os: windows-latest
             artifact_name: MAPS0DesktopClient-Windows
+          - os: macos-13
+            artifact_name: MAPS0DesktopClient-macOS-Intel
           - os: macos-latest
-            artifact_name: MAPS0DesktopClient-macOS
+            artifact_name: MAPS0DesktopClient-macOS-AppleSilicon
           - os: ubuntu-22.04
             artifact_name: MAPS0DesktopClient-Linux
 
@@ -45,7 +47,7 @@ jobs:
               libxcb-cursor-dev libxkbcommon-dev
 
       - name: Configure CMake
-        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0
 
       - name: Build
         run: cmake --build build --config Release --parallel
@@ -70,7 +72,6 @@ jobs:
             (sudo apt-get install -y imagemagick && convert -size 256x256 xc:'#3a7bd5' AppDir/usr/share/icons/hicolor/256x256/apps/maps0.png)
 
           export QML_SOURCES_PATHS=$PWD
-          # Force bundling of GL/EGL/xcb libs that linuxdeploy-plugin-qt skips by default
           export EXTRA_QT_MODULES="opengl;openglwidgets;charts"
           ./linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt \
               --library /usr/lib/x86_64-linux-gnu/libOpenGL.so.0 \
@@ -81,10 +82,13 @@ jobs:
           mkdir -p artifacts
           mv MAPS0_Desktop_Client*.AppImage artifacts/ 2>/dev/null || mv *.AppImage artifacts/
 
-      # ── macOS: package the .app into a DMG ────────────────────────────
+      # ── macOS: codesign + package the .app into a DMG ─────────────────
       - name: Build DMG (macOS)
         if: runner.os == 'macOS'
         run: |
+          # Ad-hoc codesign so Gatekeeper doesn't immediately reject it
+          codesign --force --deep --sign - "dist/MAPS0 Desktop Client.app"
+
           mkdir -p artifacts
           hdiutil create -volname "MAPS0 Desktop Client" \
               -srcfolder "dist/MAPS0 Desktop Client.app" \
