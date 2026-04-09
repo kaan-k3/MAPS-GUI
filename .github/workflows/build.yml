@@ -17,10 +17,8 @@ jobs:
         include:
           - os: windows-latest
             artifact_name: MAPS0DesktopClient-Windows
-          - os: macos-13
-            artifact_name: MAPS0DesktopClient-macOS-Intel
           - os: macos-latest
-            artifact_name: MAPS0DesktopClient-macOS-AppleSilicon
+            artifact_name: MAPS0DesktopClient-macOS
           - os: ubuntu-22.04
             artifact_name: MAPS0DesktopClient-Linux
 
@@ -46,8 +44,13 @@ jobs:
               libopengl0 libegl1 libglx0 libglvnd0 \
               libxcb-cursor-dev libxkbcommon-dev
 
+      - name: Configure CMake (macOS universal)
+        if: runner.os == 'macOS'
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0 -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+
       - name: Configure CMake
-        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_DEPLOYMENT_TARGET=12.0
+        if: runner.os != 'macOS'
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         run: cmake --build build --config Release --parallel
