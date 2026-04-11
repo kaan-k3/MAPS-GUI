@@ -58,7 +58,7 @@ jobs:
       - name: Install (stages binary + Qt runtime)
         run: cmake --install build --prefix dist --config Release
 
-      # ── Linux: wrap the install dir in an AppImage ────────────────────
+      # linux: wrap the install dir in an AppImage 
       - name: Build AppImage (Linux)
         if: runner.os == 'Linux'
         run: |
@@ -85,7 +85,7 @@ jobs:
           mkdir -p artifacts
           mv MAPS0_Desktop_Client*.AppImage artifacts/ 2>/dev/null || mv *.AppImage artifacts/
 
-      # ── macOS: codesign + package the .app into a DMG ─────────────────
+      # macOS: codesign + package the .app into a DMG
       - name: Build DMG (macOS)
         if: runner.os == 'macOS'
         run: |
@@ -98,7 +98,7 @@ jobs:
               -ov -format UDZO \
               "artifacts/MAPS0DesktopClient.dmg"
 
-      # ── Windows: just zip the install dir ─────────────────────────────
+      # windows: just zip the install dir
       - name: Package ZIP (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
